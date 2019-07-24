@@ -15,7 +15,7 @@ desc "Fill the database tables with some dummy data"
     Comment.delete_all
     FollowRequest.delete_all
 
-    User.create([
+    users = [
       {id: 81, username: "Galen", private: false, likes_count: 97, comments_count: 98, created_at: "2015-01-19 09:24:34"},
       {id: 82, username: "Trina", private: false, likes_count: 22, comments_count: 35, created_at: "2014-09-02 06:05:56"},
       {id: 83, username: "Tyree", private: true, likes_count: 23, comments_count: 41, created_at: "2017-06-23 22:31:32"},
@@ -56,8 +56,9 @@ desc "Fill the database tables with some dummy data"
       {id: 118, username: "Isidro", private: false, likes_count: 19, comments_count: 10, created_at: "2017-09-20 21:46:36"},
       {id: 119, username: "Nakita", private: false, likes_count: 19, comments_count: 30, created_at: "2017-06-02 16:55:13"},
       {id: 120, username: "Elmer", private: true, likes_count: 36, comments_count: 36, created_at: "2017-11-24 23:32:54"}
-    ])
-    FollowRequest.create([
+    ]
+    User.import(users, {:validate => false})
+    follow_requests = [
       {id: 1608, sender_id: 114, recipient_id: 81, status: "accepted", created_at: "2015-04-24 01:26:47"},
       {id: 1609, sender_id: 118, recipient_id: 81, status: "accepted", created_at: "2018-03-20 11:34:16"},
       {id: 1610, sender_id: 119, recipient_id: 81, status: "accepted", created_at: "2018-01-28 00:37:26"},
@@ -853,8 +854,9 @@ desc "Fill the database tables with some dummy data"
       {id: 2400, sender_id: 111, recipient_id: 120, status: "accepted", created_at: "2018-03-16 13:57:41"},
       {id: 2401, sender_id: 99, recipient_id: 120, status: "pending", created_at: "2018-09-01 00:01:41"},
       {id: 2402, sender_id: 104, recipient_id: 120, status: "accepted", created_at: "2018-10-24 17:24:38"}
-    ])
-    Comment.create([
+    ]
+    FollowRequest.import(follow_requests, {:validate => false})
+    comments = [
       {id: 2730, photo_id: 628, body: "There was never a genius without a tincture of madness.", author_id: 96, created_at: "2019-03-19 03:56:09"},
       {id: 2731, photo_id: 628, body: "It's not what happens to you, but how you react to it that matters.", author_id: 115, created_at: "2018-07-20 04:14:14"},
       {id: 2732, photo_id: 628, body: "Dignity does not consist in possessing honors, but in deserving them.", author_id: 114, created_at: "2018-11-28 14:09:53"},
@@ -2414,8 +2416,9 @@ desc "Fill the database tables with some dummy data"
       {id: 4286, photo_id: 950, body: "Only the educated are free.", author_id: 104, created_at: "2019-03-05 17:39:26"},
       {id: 4287, photo_id: 950, body: "Quality is not an act, it is a habit.", author_id: 82, created_at: "2019-02-20 18:14:17"},
       {id: 4288, photo_id: 950, body: "Quality is not an act, it is a habit.", author_id: 83, created_at: "2018-11-11 12:16:00"}
-    ])
-    Photo.create([
+    ]
+    Comment.import(comments, {:validate => false})
+    photos = [
       {id: 628, caption: "Every flight begins with a fall.", image: "https://robohash.org/eligendiprovidentsed.png?size=300x300&set=set1", owner_id: 81, likes_count: 1, comments_count: 5, created_at: "2017-10-16 01:36:25"},
       {id: 629, caption: "And so he spoke, and so he spoke, that Lord of Castamere, but now the rains weep o'er his hall, with no one there to hear. Yes, now the rains weep o'er his hall, and not a soul to hear.", image: "https://robohash.org/officiaeligendirepudiandae.png?size=300x300&set=set1", owner_id: 81, likes_count: 5, comments_count: 2, created_at: "2015-10-07 17:04:58"},
       {id: 630, caption: "And I have a tender spot in my heart for cripples and bastards and broken things.", image: "https://robohash.org/omnissitvel.png?size=300x300&set=set1", owner_id: 81, likes_count: 4, comments_count: 4, created_at: "2015-01-23 18:24:13"},
@@ -2739,8 +2742,9 @@ desc "Fill the database tables with some dummy data"
       {id: 948, caption: "Winter is coming.", image: "https://robohash.org/sitsimiliqueet.png?size=300x300&set=set1", owner_id: 120, likes_count: 3, comments_count: 5, created_at: "2019-02-02 22:45:19"},
       {id: 949, caption: "The North remembers.", image: "https://robohash.org/autperspiciatisquasi.png?size=300x300&set=set1", owner_id: 120, likes_count: 5, comments_count: 6, created_at: "2018-01-06 13:17:34"},
       {id: 950, caption: "Hodor? Hodor.", image: "https://robohash.org/distinctiosedmolestiae.png?size=300x300&set=set1", owner_id: 120, likes_count: 8, comments_count: 6, created_at: "2018-10-30 02:17:52"}
-    ])
-    Like.create([
+    ]
+    Photo.import(photos, {:validate => false})
+    likes = [
       {id: 2759, fan_id: 99, photo_id: 628, created_at: "2018-09-12 15:52:43"},
       {id: 2760, fan_id: 102, photo_id: 629, created_at: "2017-02-23 08:01:05"},
       {id: 2761, fan_id: 95, photo_id: 629, created_at: "2017-01-31 01:10:14"},
@@ -4205,7 +4209,8 @@ desc "Fill the database tables with some dummy data"
       {id: 4220, fan_id: 81, photo_id: 950, created_at: "2019-04-02 18:32:39"},
       {id: 4221, fan_id: 83, photo_id: 950, created_at: "2018-12-09 23:55:00"},
       {id: 4222, fan_id: 83, photo_id: 950, created_at: "2019-01-27 16:21:31"}
-    ])
+    ]
+    Like.import(likes, {:validate => false})
 
     ending = Time.now
     elapsed = ending - starting
