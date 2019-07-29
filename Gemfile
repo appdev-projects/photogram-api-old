@@ -62,6 +62,8 @@ end
 
 group :development do
   gem 'annotate'
+  gem "rubocop-rails"
+  gem "rubocop-performance"
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'draft_generators', github: 'firstdraft/draft_generators'
